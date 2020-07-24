@@ -10,12 +10,12 @@ export const main = handler(async (event, context) => {
     // 'ExpressionAttributeValues' defines the value in the condition
     // - ':userId': defines 'userId' to be Identity Pool identity id
     //   of the authenticated user
-    KeyConditionExpression: "userId = :userId",
+    KeyConditionExpression: "entityId = :entityId",
     ExpressionAttributeValues: {
-      ":userId": event.requestContext.identity.cognitoIdentityId,
+      ":entityId": event.request.userAttributes["custom:entityId"],
     },
   }
-  console.log(event)
+
   const result = await dynamoDb.query(params)
 
   // Return the matching list of items in response body
