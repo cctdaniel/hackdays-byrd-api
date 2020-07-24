@@ -33,10 +33,6 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:us-east-2:*:table/hackdays-byrd"
-    - Effect: Allow
-      Action:
-        - cognito-idp:AdminGetUser
-      Resource: ${self:custom.extra.cognito.userPoolArn}
 
 functions:
   # Defines an HTTP API endpoint that calls the main function in create.js
