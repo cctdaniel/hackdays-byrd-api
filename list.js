@@ -1,7 +1,8 @@
-import handler from "./libs/handler-lib"
 import dynamoDb from "./libs/dynamodb-lib"
+import handler from "./libs/handler-lib"
 
 export const main = handler(async (event, context) => {
+  console.log(event, context)
   const params = {
     TableName: process.env.tableName,
     // 'KeyConditionExpression' defines the condition for the query
@@ -12,7 +13,7 @@ export const main = handler(async (event, context) => {
     //   of the authenticated user
     KeyConditionExpression: "entityId = :entityId",
     ExpressionAttributeValues: {
-      ":entityId": event.request.userAttributes["custom:entityId"],
+      ":entityId": event.queryStringParameters["custom:entityId"],
     },
   }
 
